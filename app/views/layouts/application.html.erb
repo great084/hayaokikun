@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>HayaokiKun</title>
+    <title>はやおきくん</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+
+    <!-- 表示をスマートフォンに対応させる -->
+    <meta name="viewport", content="width=divise-width, initial-scale=1 ">
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+    <!-- 全ページの横幅に上限を設ける（cssは後に追加） -->
+    <div class="graph-container">
     <%= yield %>
+    </div>
   </body>
 </html>
