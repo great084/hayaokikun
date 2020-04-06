@@ -1,2 +1,53 @@
 <h1>Graphs#index</h1>
 <p>Find me in app/views/graphs/index.html.erb</p>
+
+
+<p class="mt-4">ボタンを押したときにモーダルが表示されれば，「Bootstrap」の導入はOKです</p>
+<button type="button" class="btn btn-primary btn-block" 
+    data-toggle="modal" data-target="#test-modal">ボタン</button>
+<!-- ボタンを押したとき，以下のモーダルが出現 -->
+<div class="modal fade" id="test-modal" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">タイトル</h5>
+                <button type="button" class="close" data-dismiss="modal" arial-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>本文はここに書きます</p>
+            </div>
+            <div class="modal-fotter">
+                <p>フッターはここに書きます</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p class="my-4">フォームをクリックしたときに，青色の帯のカレンダーが出れば「flatpickr」の導入はOKです</p>
+<input class="form-control bg-white" type="text" id="date-form" placeholder="日付を設定" readonly>
+
+<!-- Script -->
+<script>
+
+    const TODAY = new Date(new Date().setHours(0, 0, 0, 0))
+    const A_MONTH_AGO = new Date(TODAY.getFullYear(), TODAY.getMonth() -1, TODAY.getDate())
+
+    // 選択できない日付データ
+    const DISABLE_DATES = ['2019-12-10', '2020-04-05']
+
+    // カレンダーの日本語化
+    flatpickr.localize(flatpickr.l10ns.ja)
+
+    // カレンダーの表示
+    flatpickr('#date-form', {
+        // スマホでもfaltpickarを使用
+        disableMobile: true,
+        // 1ヶ月前から本日まで選択可能
+        minDate: A_MONTH_AGO,
+        maxDate: TODAY,
+        // 選択できない日付
+        disable: DISABLE_DATES
+    })
+</script>
