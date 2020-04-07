@@ -1,7 +1,34 @@
 <%= Gon::Base.render_data %>
-<h1>Graphs#index</h1>
-<p>Find me in app/views/graphs/index.html.erb</p>
 
+<div class="row no-gutters">
+    <div class="input-group col-sm-6 pr-sm-3 mt-3">
+        <div class="input-group-prepend"><div class="input-group-text">開始</div></div>
+        <input type="text" id="start-calendar" class="form-control bg-white text-center">
+    </div>
+    <div class="input-group col-sm-6 pl-sm-3 mt-3">
+        <div class="input-group-prepend"><div class="input-group-text">終了</div></div>
+        <input type="text" id="end-calendar" class="form-control bg-white text-center">
+    </div>
+</div>
+
+<p class="my-4">フォームをクリックしたときに，青色の帯のカレンダーが出れば「flatpickr」の導入はOKです</p>
+<input class="form-control bg-white" type="text" id="date-form" placeholder="日付を設定" readonly>
+
+
+<div class="row">
+    <div class="col-6 col-sm-3">
+        <input type="button" value="過去１週間" class="btn btn-success btn-block mt-3" id="a-week-button">
+    </div>
+    <div class="col-6 col-sm-3">
+        <input type="button" value="過去２週間" class="btn btn-success btn-block mt-3" id="two-weeks-button">
+    </div>
+    <div class="col-6 col-sm-3">
+        <input type="button" value="過去１ヶ月" class="btn btn-success btn-block mt-3" id="a-month-button">
+    </div>
+    <div class="col-6 col-sm-3">
+        <input type="button" value="過去３ヶ月" class="btn btn-success btn-block mt-3" id="three-months-button">
+    </div>
+</div>
 
 <p class="mt-4">ボタンを押したときにモーダルが表示されれば，「Bootstrap」の導入はOKです</p>
 <button type="button" class="btn btn-primary btn-block" 
@@ -26,8 +53,6 @@
     </div>
 </div>
 
-<p class="my-4">フォームをクリックしたときに，青色の帯のカレンダーが出れば「flatpickr」の導入はOKです</p>
-<input class="form-control bg-white" type="text" id="date-form" placeholder="日付を設定" readonly>
 
 
 <p class="mt-4">棒グラフが表示されていれば，「Chart.js」の導入はOKです</p>
