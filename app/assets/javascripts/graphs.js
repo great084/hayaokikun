@@ -22,36 +22,62 @@ document.addEventListener('turbolinks:load', () => {
         disable: DISABLE_DATES
     })
 
-    // 棒グラフのデータ
-    let barLabel = ['1月','2月','3月','4月','5月']
-    let barData = [5, 4, 2, 6, 5]
+    // 新規登録用のカレンダー
+    flatpickr('#new-calendar', {
+        disableMobile: true,
+        // 記録のある日付を選択できないようにする
+        disable: gon.recorded_dates,
+        defaultDate: CAL_TODAY
+    })    
 
-    // 棒グラフのオプション
-    const barChartData = {
-        labels: barLabel,
-        datasets: [{
-            label: '点数',
-            data:   barData,
-            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-            borderColor: 'rgba(54, 162, 235, 1)',
-            borderWidth: 1
-        }]
-    } 
-
-    const barChartOption = {
-        title: {
-            display: true,
-            text: '棒グラフ'
-        },
-        scales: {
-            yAxes: [{
-                ticks: {
-                    // yAxesのメモリを0からスタートに強制
-                    beginAtZero: true
-                }
-            }]
-        }
+    // 編集モーダルで日付を選択したときに、記録された体重を表示する
+    const editCalendar = document.getElementById('edit-calendar')
+    const editWeight = document.getElementById('edit-weight')
+    const inputWeight = () => {
+        let record = gon.weight_records.find((record) => record.date === editCalendar.value)
+        editWeight.value = record.weight
     }
+
+    // 変更登録用のカレンダー
+    flatpickr('#edit-calendar', {
+        disableMobile: true,
+        // 記録のある日付を選択できないようにする
+        enable: gon.recorded_dates,
+        // 記録がない日付を選択できないようにする
+        noCalendar: gon.recorded_dates.length === 0,
+        onChange: inputWeight
+    })    
+
+    // 棒グラフのデータ
+    // let barLabel = ['1月','2月','3月','4月','5月']
+    // let barData = [5, 4, 2, 6, 5]
+
+    // // 棒グラフのオプション
+    // const barChartData = {
+    //     labels: barLabel,
+    //     datasets: [{
+    //         label: '点数',
+    //         data:   barData,
+    //         backgroundColor: 'rgba(54, 162, 235, 0.2)',
+    //         borderColor: 'rgba(54, 162, 235, 1)',
+    //         borderWidth: 1
+    //     }]
+    // } 
+
+    // const barChartOption = {
+    //     title: {
+    //         display: true,
+    //         text: '棒グラフ'
+    //     },
+    //     scales: {
+    //         yAxes: [{
+    //             ticks: {
+    //                 // yAxesのメモリを0からスタートに強制
+    //                 beginAtZero: true
+    //             }
+    //         }]
+    //     }
+    // }
 
     // 棒グラフを表示
     // const barChartContext = document.getElementById("bar-chart").getContext('2d')
@@ -118,6 +144,7 @@ document.addEventListener('turbolinks:load', () => {
 
     // カレンダーの日本語化
     flatpickr.localize(flatpickr.l10ns.ja)
+
 
     const drawGraphForPeriod = () => {
         let from = convertDate(document.getElementById('start-calendar').value)
@@ -247,5 +274,6 @@ document.addEventListener('turbolinks:load', () => {
     
     // グラフの初期表示
     drawGraphToToday(A_MONTH_AGO)
-    
+
+
 })
